@@ -13,7 +13,11 @@ const app = express();
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 
-// TODO setup your api routes here
+// Setup REST api routes here 
+app.use("/api", require("./routes/index")); //index route 
+app.use("/api/users", require("./routes/users")); //users route
+app.use("/api/courses", require("./routes/courses"));//courses route
+app.use("/api/authenticate", require("./routes/authenticate"));//authenticate rote
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {

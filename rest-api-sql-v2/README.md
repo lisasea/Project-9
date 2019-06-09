@@ -2,7 +2,7 @@
 # Full Stack JavaScript Techdegree v2 - REST API Project
 
 ## Overview of the Provided Project Files
-
+l
 We've supplied the following files for you to use: 
 
 * The `seed` folder contains a starting set of data for your database in the form of a JSON file (`data.json`) and a collection of files (`context.js`, `database.js`, and `index.js`) that can be used to create your app's database and populate it with data (we'll explain how to do that below).
@@ -43,11 +43,11 @@ To test the Express server, browse to the URL [http://localhost:5000/](http://lo
 Directions:
 XX GitHub
 XX Create a new repo for this project.
-XX Create a .gitignore and use it to make sure your      node_modules folder is not stored in or tracked by    your repo.
-Create a README.md file for your repo that explains what the project is and anything your user or fellow developers might need to know to use the project.
+XX Create a .gitignore and use it to make sure your      node_modules folder is        not stored in or tracked by    your repo.
+__ Create a README.md file for your repo that explains what the project is and        anything your user or fellow developers might need to know to use the project.
 
 XX  Ensure that you have Node installed
-XX  Make sure you have a recent version of Node:          8.0.0 or later. For instructions on installing        and updating Node.js see our Installing Node.js       and NPM on Windows or Installing Node.js and NPM      on Mac installation guides.
+XX  Make sure you have a recent version of Node:          8.0.0 or later. For    instructions on installing and updating Node.js see our Installing Node.js       and NPM on Windows or Installing Node.js and NPM      on Mac installation guides.
 
 XX  Install Node modules and get the      database setup
   Open a Command Prompt (on Windows) or Terminal (on macOS and Linux) instance and browse to the root project folder.
