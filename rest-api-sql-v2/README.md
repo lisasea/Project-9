@@ -1,5 +1,7 @@
 
-# Full Stack JavaScript Techdegree v2 - REST API Project
+# REST API - FSJS Techdegree v2 - Project 9
+
+## Created using React, Express, Node.js, Sequelize ORM and Postman.n
 
 ## Overview of the Provided Project Files
 l
