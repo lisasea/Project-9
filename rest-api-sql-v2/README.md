@@ -1,7 +1,7 @@
 
 # REST API - FSJS Techdegree v2 - Project 9
 
-## Created using React, Express, Node.js, Sequelize ORM and Postman.n
+## Created using Express, Node.js, Sequelize ORM and Postman.
 
 ## Overview of the Provided Project Files
 l
