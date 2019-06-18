@@ -80,11 +80,5 @@ app.use((err, req, res, next) => {
 
 app.listen(5000, () => console.log('Quote API listening on port 5000!')); // set our port
 
-/* 
-app.set('port', process.env.PORT || 5000); //start listening on our port
-const server = app.listen(app.get('port'), () => {
-  console.log(`Express server is listening on port ${server.address().port}`);
-});
-*/
 
 
