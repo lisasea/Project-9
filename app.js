@@ -78,7 +78,7 @@ app.use((err, req, res, next) => {
 });
 */
 
-app.listen(5000, () => console.log('Quote API listening on port 5000!')); // set our port
+app.listen(5000, () => console.log('REST API listening on port 5000!')); // set our port
 
 
 

@@ -12,9 +12,21 @@ module.exports = (sequelize, DataTypes) => {
         },  
         title: {
             type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notNull: {
+                    msg: "Title required"
+                }
+            }
         },
        description: {
             type: DataTypes.TEXT,
+            allowNull: false,
+            validate: {
+                notNull: {
+                    msg: "Course description required"
+                }
+            }
         }, 
         estimatedTime: {
             type: DataTypes.STRING,
