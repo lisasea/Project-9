@@ -43,49 +43,50 @@ To test the Express server, browse to the URL [http://localhost:5000/](http://lo
 Directions:
 XX GitHub
 XX Create a new repo for this project.
-Create a .gitignore and use it to make sure your node_modules folder is not stored in or tracked by your repo.
-Create a README.md file for your repo that explains what the project is and anything your user or fellow developers might need to know to use the project.
+XX  Create a .gitignore and use it to make sure your node_modules folder is not stored in or tracked by your repo.
+XX  Create a README.md file for your repo that explains what the project is and anything your user or fellow developers might need to know to use the project.
 
 Ensure that you have Node installed
-Make sure you have a recent version of Node: 8.0.0 or later. For instructions on installing and updating Node.js see our Installing Node.js and NPM on Windows or Installing Node.js and NPM on Mac installation guides.
+XX  Make sure you have a recent version of Node: 8.0.0 or later. For instructions on installing and updating Node.js see our Installing Node.js and NPM on Windows or Installing Node.js and NPM on Mac installation guides.
 
-Install Node modules and get the database setup
+XX Install Node modules and get the database setup
 Open a Command Prompt (on Windows) or Terminal (on macOS and Linux) instance and browse to the root project folder.
-Run the command npm install to install the required dependencies.
-Run the command npm run seed to create your application's database and populate it with data.
-After the command completes, you'll find in the project's root folder a SQLite database file named fsjstd-restapi.db. To view the data inside the database, you can use DB Browser for SQLite. See DB Browser for SQLite for more information.
-Run the command npm start to run the Node.js Express application.
+XX Run the command npm install to install the required dependencies.
+XX Run the command npm run seed to create your application's database and populate it with data.
+XX After the command completes, you'll find in the project's root folder a SQLite database file named fsjstd-restapi.db. To view the data inside the database, you can use DB Browser for SQLite. See DB Browser for SQLite for more information.
+XX Run the command npm start to run the Node.js Express application.
 You can press Ctrl-C to stop the Node.js REST API.
 Working on the project
 The app.js file located in the root of the project folder configures Express to serve a simple REST API. You'll update this file to add your REST API routes.
-You'll build your application by adding .js files to the project. Use folders as you see fit to organize your application's files.
-Install and Configure Sequelize
-Use npm to install Sequelize (the module is named sequelize.)
-Note: The sqlite3 package that Sequelize depends upon to communicate with SQLite databases has already been installed.
-Instantiate an instance of the Sequelize class and configure the instance to use the fsjstd-restapi.db SQLite database that you generated when setting up the project.
-Use the authenticate() method to test the connection to the database.
-Log a message to the console indicating if the connection was successfully made or failed.
-Define your Sequelize models
-Define two Sequelize models: one for the Users table and another for the Courses table.`. Define the models following these requirements:
+XX You'll build your application by adding .js files to the project. Use folders as you see fit to organize your application's files.
+XX Install and Configure Sequelize
+XX Use npm to install Sequelize (the module is named sequelize.)
+XX Note: The sqlite3 package that Sequelize depends upon to communicate with SQLite databases has already been installed.
+XX Instantiate an instance of the Sequelize class and configure the instance to use the fsjstd-restapi.db SQLite database that you generated when setting up the project.
+XX Use the authenticate() method to test the connection to the database.
+XX Log a message to the console indicating if the connection was successfully made or failed.
+XX Define your Sequelize models
+XX Define two Sequelize models: one for the Users table and another for the Courses table.`. Define the models following these requirements:
 User
-id (Integer, primary key, auto-generated)
-firstName (String)
-lastName (String)
-emailAddress (String)
-password (String)
+XX id (Integer, primary key, auto-generated)
+XX firstName (String)
+XX lastName (String)
+XX emailAddress (String)
+XX password (String)
 Course
-id (Integer, primary key, auto-generated)
-userId (id from the Users table)
-title (String)
-description (Text)
-estimatedTime (String, nullable)
-materialsNeeded (String, nullable)
-When defining models for an existing database...
-Be careful when naming your models and model properties! Model names and model properties need to match the above provided names exactly. Otherwise, your database access code won't work as expected.
+XX id (Integer, primary key, auto-generated)
+XX userId (id from the Users table)
+XX title (String)
+XX description (Text)
+XX estimatedTime (String, nullable)
+XX materialsNeeded (String, nullable)
+XX When defining models for an existing database...
+XX Be careful when naming your models and model properties! Model names and model properties need to match the above provided names exactly. Otherwise, your database access code won't work as expected.
 If Sequelize throws an error related to a mismatch between the model and the associated table, the error message should tell you the cause of the problem.
-Define associations between your models
-Within your User model, define a HasMany association between your User and Course models (i.e. a "User" has many "Courses").
-Within your Course model, define a BelongsTo association between your Course and User models (i.e. a "Course" belongs to a single "User").
+XX Define associations between your models
+XX Within your User model, define a HasMany association between your User and Course models (i.e. a "User" has many "Courses").
+XX Within your Course model, define a BelongsTo association between your Course and User models (i.e. a "Course" belongs to a single "User").
+
 Create the user routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
 GET /api/users 200 - Returns the currently authenticated user
