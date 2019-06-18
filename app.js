@@ -19,14 +19,14 @@ app.use(morgan('dev'));
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({ //builds data base
   dialect: 'sqlite',
-  storage: 'path/to/database.sqlite'
+  storage: './fsjstd-restapi.db'
 });
 
 sequelize //tests data base connection
   .authenticate()
   .then(() => {
     console.log('Connection to database success!');
-  });
+  })
   .catch(err => {
     console.error('Unable to connect to database. :/')
   });
