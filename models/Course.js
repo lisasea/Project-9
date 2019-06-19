@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    Course.associate = models => {
-        Course.belongsTo(models.User);
+    Course.associate = function(models) {
+        models.Course.belongsTo(models.User, { foreignKey: "userId" });
     };
 
     return Course;
