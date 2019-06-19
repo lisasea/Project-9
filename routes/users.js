@@ -1,5 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const morgan = require("morgan");
+const User = require("../models").User;
+const Sequelize = require("sequelize");
+
+router.get("/", (req, res) => { //returns the user (need to do currently authenticated part)
+    res.status(200);
+    res.json({
+        id: req.currentUser.id,
+        firstName: req.currentUser.firstName,
+        lastName: req.currentUser.lastName,
+        emailAddress: req.currentUser.emailAddress,
+    });
+});
 
 
 

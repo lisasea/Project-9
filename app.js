@@ -47,14 +47,15 @@ app.get('/', (req, res) => {
 
 
 // SEND GET request to READ a list of courses
-// SEND GET request to READ a list of users
 // Send GET request to READ (view) a course
-// Send GET request to READ (view) a user
 // Send POST request to CREATE a new course
-// Send POST request to CREATE a new user
 // Send PUT request to UPDATE (edit) a course
-// Send PUT request to UPDATE (edit) a user
 // Send DELETE request to DELETE a course
+
+// SEND GET request to READ a list of users
+// Send GET request to READ (view) a user
+// Send POST request to CREATE a new user
+// Send PUT request to UPDATE (edit) a user
 // Send DELETE request to DELETE a user 
 
 /*
