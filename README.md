@@ -87,10 +87,11 @@ XX Define associations between your models
 XX Within your User model, define a HasMany association between your User and Course models (i.e. a "User" has many "Courses").
 XX Within your Course model, define a BelongsTo association between your Course and User models (i.e. a "Course" belongs to a single "User").
 
-Create the user routes
+XX Create the user routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
-GET /api/users 200 - Returns the currently authenticated user
-POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
+XX GET /api/users 200-Returns currently authenticated user
+XX POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
+
 Create the course routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
 GET /api/courses 200 - Returns a list of courses (including the user that owns each course)

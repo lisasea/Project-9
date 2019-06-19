@@ -33,18 +33,20 @@ router.post("/", (req, res, next) => { //creates user
         newUser.password = bcrypt.hashSync(newUser.password); //hash password
         User.create(newUser) //create new user
             .then (() => {
-                res.location("/");
+                res.location("/"); //set Location header to "/"
                 res.status(201).end();
             })
             .catch(err => {
                 err.status = 400;
                 next(err);
             });
-        }
-        
-})
-
-
+        }      
+    })
+    .catch(err => {
+        err.status = 400;
+        next(err);
+    });
+});
 
 module.exports = router;
 
@@ -53,7 +55,7 @@ Update User and Course routes
 Update the User and Course POST and PUT routes to validate that the request body contains the following required values. Return validation errors when necessary.
 User
 firstName
-lastName
+lastName    
 emailAddress
 password
 Course
@@ -79,7 +81,7 @@ If a user was found for the provided email address, then check that user's store
 If the password comparison succeeds, then set the user on the request so that each following middleware function has access to it.
 If the password comparison fails, then return a 401 status code to the user.
 Use this middleware in the following routes:
-GET /api/users
+XX GET /api/users
 POST /api/courses
 PUT /api/courses/:id
 DELETE /api/courses/:id
