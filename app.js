@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const express = require('express'); // load modules
+const express = require("express"); // load modules
 const app = express(); // create the Express app
-const morgan = require('morgan');
+const morgan = require("morgan");
 //const routes = require('./routes'); //?? per REST API Authentication w/ express instruction
 
 // variable to enable global error logging
@@ -12,7 +12,7 @@ const morgan = require('morgan');
 app.use(express.json());
 
 // setup morgan which gives us http request logging
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 // Setup REST api routes here 
 
