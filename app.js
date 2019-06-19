@@ -3,19 +3,6 @@
 const express = require("express"); // load modules
 const app = express(); // create the Express app
 const morgan = require("morgan");
-//const routes = require('./routes'); //?? per REST API Authentication w/ express instruction
-
-// variable to enable global error logging
-//const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
-
-// setup request body JSON parsing
-app.use(express.json());
-
-// setup morgan which gives us http request logging
-app.use(morgan("dev"));
-
-// Setup REST api routes here 
-
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({ //builds data base
   dialect: 'sqlite',
@@ -31,43 +18,28 @@ sequelize //tests data base connection
     console.error('Unable to connect to database. :/')
   });
 
+app.use(express.json());   // setup request body JSON parsing
 
-/*//app.use('/api, routes); //?? per REST API Authentication w/ express instruction
-app.use("/api", require("./routes/index")); //index route 
-app.use("/api/users", require("./routes/users")); //users route
-app.use("/api/courses", require("./routes/courses"));//courses route
-app.use("/api/authenticate", require("./routes/authenticate"));//authenticate rote
-*///
-// setup a friendly greeting for the root route
-app.get('/', (req, res) => {
+app.use(morgan("dev")); // setup morgan which gives us http request logging
+
+app.get('/', (req, res) => { // setup a friendly greeting for the root route
   res.json({
     message: 'Welcome to the REST API project!',
   });
 });
 
+app.use("/api", require("./routes/indexes")); //index route 
+app.use("/api/users", require("./routes/users")); //users route
+app.use("/api/courses", require("./routes/courses"));//courses route
+app.use("/api/authenticate", require("./routes/authenticate"));//authenticate rote
 
-// SEND GET request to READ a list of courses
-// Send GET request to READ (view) a course
-// Send POST request to CREATE a new course
-// Send PUT request to UPDATE (edit) a course
-// Send DELETE request to DELETE a course
-
-// SEND GET request to READ a list of users
-// Send GET request to READ (view) a user
-// Send POST request to CREATE a new user
-// Send PUT request to UPDATE (edit) a user
-// Send DELETE request to DELETE a user 
-
-/*
-// send 404 if no other route matched
-app.use((req, res) => {
+app.use((req, res) => {  // send 404 if no other route matched
   res.status(404).json({
     message: 'Route Not Found',
   });
 });
 
-// setup a global error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, next) => { // setup a global error handler
   if (enableGlobalErrorLogging) {
     console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
   }
@@ -77,9 +49,5 @@ app.use((err, req, res, next) => {
     error: {},
   });
 });
-*/
 
 app.listen(5000, () => console.log('REST API listening on port 5000!')); // set our port
-
-
-

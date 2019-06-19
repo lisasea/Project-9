@@ -99,6 +99,19 @@ GET /api/courses/:id 200 - Returns a the course (including the user that owns th
 POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
 PUT /api/courses/:id 204 - Updates a course and returns no content
 DELETE /api/courses/:id 204 - Deletes a course and returns no content
+
+// SEND GET request to READ a list of courses
+// Send GET request to READ (view) a course
+// Send POST request to CREATE a new course
+// Send PUT request to UPDATE (edit) a course
+// Send DELETE request to DELETE a course
+
+// SEND GET request to READ a list of users
+// Send GET request to READ (view) a user
+// Send POST request to CREATE a new user
+// Send PUT request to UPDATE (edit) a user
+// Send DELETE request to DELETE a user 
+
 Update User and Course routes
 Update the User and Course POST and PUT routes to validate that the request body contains the following required values. Return validation errors when necessary.
 User
