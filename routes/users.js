@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const morgan = require("morgan");
+const morgan = require("morgan"); //do I need this here?
 const User = require("../models").User;
-const Sequelize = require("sequelize");
+const authenticateUser = require("./authenticate");
+const Sequelize = require("sequelize"); //do I need this here?
 
-router.get("/", (req, res) => { //returns the user (need to do currently authenticated part)
+router.get("/", authenticateUser, (req, res) => { //returns the current authenticated user
     res.status(200);
     res.json({
         id: req.currentUser.id,
@@ -13,6 +14,35 @@ router.get("/", (req, res) => { //returns the user (need to do currently authent
         emailAddress: req.currentUser.emailAddress,
     });
 });
+
+
+// /*                
+router.post("/", (req, res, next) => { //creates user
+    User.findOne({ where: { emailAddress: req.body.emailAddress }}) //check to see if email already exists
+        .then(user => {
+            if (user) { //if email already exists - error message
+            res.status(400);
+            res.json({ error: "User with this email already exists"})
+        } else {
+            const newUser = { //if email does NOT exist create new user
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                emailAddress: req.body.emailAddress,
+                password: req.body.password
+            };
+        newUser.password = bcrypt.hashSync(newUser.password); //hash password
+        User.create(newUser) //create new user
+            .then (() => {
+                res.location("/");
+                res.status(201).end();
+            })
+            .catch(err => {
+                err.status = 400;
+                next(err);
+            });
+        }
+        
+})
 
 
 
