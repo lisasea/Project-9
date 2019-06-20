@@ -4,6 +4,7 @@ const express = require("express"); // load modules
 const app = express(); // create the Express app
 const morgan = require("morgan");
 const fs = require('fs');
+const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === "true";
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({ //builds data base
   dialect: 'sqlite',
