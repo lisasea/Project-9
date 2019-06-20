@@ -31,7 +31,7 @@ app.get('/', (req, res) => { // setup a friendly greeting for the root route
 
 app.use("/api/indexes", require("./routes/indexes")); //index route 
 app.use("/api/users", require("./routes/users")); //users route
-app.use("/api/courses", require("./routes/courses"));//courses route
+app.use("/api/courses", require("./routes/courses")); //courses route
 app.use("/api/authenticate", require("./routes/authenticate"));//authenticate rote
 
 app.use((req, res) => {  // send 404 if no other route matched
