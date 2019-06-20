@@ -1,5 +1,5 @@
 {
-    "developmennt": {
+    "development": {
         "dialect": "sqlite",
         "storage": "./fsjstd-restapi.db"
     },
@@ -7,7 +7,7 @@
         "dialect": "sqlite",
         "storage": "./fsjstd-restapi.db"      
     },
-    "prodction": {
+    "production": {
         "dialect": "sqlite",
         "storage": "./fsjstd-restapi.db"
     }

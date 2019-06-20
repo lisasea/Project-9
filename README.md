@@ -90,7 +90,7 @@ XX Within your Course model, define a BelongsTo association between your Course 
 XX Create the user routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
 XX GET /api/users 200-Returns currently authenticated user
-XX POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
+XX POST /api/users 201 - Creates a user, sets the Location header to ?? "/", and returns no content //does this work??
 
 Create the course routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
@@ -126,13 +126,14 @@ Implement validations within your route handlers or your Sequelize models.
 Sequelize model validation gives you a rich set of tools to validate user data. See Sequelize docs for more information.
 Use the Express next() function in each route handler to pass any Sequelize validation errors to the global error handler.
 Send validation error(s) with a400 status code to the user.
-Hashing the password
-Update the POST /api/users route to hash the user's password before persisting the user to the database.
-For security reasons, we don't want to store user passwords in the database as clear text.
-Use the bcryptjs npm package to hash the user's password.
-See https://github.com/dcodeIO/bcrypt.js for more information.
-Set up permissions to require users to be signed in
-Add a middleware function that attempts to get the user credentials from the Authorization header set on the request.
+XX Hashing the password
+XX Update the POST /api/users route to hash the user's password before persisting the user to the database.
+XX For security reasons, we don't want to store user passwords in the database as clear text.
+XX Use the bcryptjs npm package to hash the user's password.
+XX See https://github.com/dcodeIO/bcrypt.js for more information.
+XX Set up permissions to require users to be signed in
+XX Add a middleware function that attempts to get the user XX XX credentials from the Authorization header set on the request.
+
 You can use the basic-auth npm package to parse the Authorization header into the user's credentials.
 The user's credentials will contain two values: a name value—the user's email address—and a pass value—the user's password (in clear text).
 Use the user's email address to attempt to retrieve the user from the database.
