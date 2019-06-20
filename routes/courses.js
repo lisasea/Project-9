@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Sequelize = require("sequelize"); //do I need this?
-const Course = require("../models".Course);
-const User = require("..models".User);
+const Course = require("../models".Course); //require("../models".Course);
+const User = require("../models".User);
 const authenticateUser = require("./authenticate");
 
 function asyncHandler(cb) {
@@ -99,7 +99,7 @@ router.put("/:id", authenticateUser, (req, res) => {  //?? need (req, res, next)
 });
         
 router.delete("/:id", authenticateUser, (req, res) => { //DELETE /api/courses/:id 204 - Deletes a course
-    Course.findOne({ where: {id: req.params;id}})
+    Course.findOne({ where: {id: req.params,id}})
         .then(course => {
             if(!course) {
                 res.status(400);
