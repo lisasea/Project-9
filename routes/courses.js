@@ -75,7 +75,28 @@ router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201
         });
 });
 
-//PUT /api/courses/:id 204 - Updates a course
+router.put("/:id", authenticateUser, (req, res) => {  //?? need (req, res, next)?? PUT /api/courses/:id 204 - Updates a course
+    Course.findOne({ where: {id: req.params.id} })
+        .then(course => {
+            if(!course) {
+                res.status(400);
+                res.json({ error: "Course not found."});
+            } else {
+                const courseUpdated = {
+                    title: req.body.title,
+                    description: req.body.description,
+                    estimatedTime: req.body.estimatedTime,
+                    materialsNeeded: req.body.materialsNeeded,
+                    userId: req.currentUser.id
+                };  
+                course.update(courseUpdated);
+            }
+        })
+        .then(() => {
+            res.status(204).end();
+        })
+        .catch(err => console.error(err));
+});
         
 
 
