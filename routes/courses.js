@@ -22,25 +22,61 @@ router.get("/", asyncHandler( async (req, res) => { //SEND GET request to Return
         include: [
             {
                 model: User,
-                attributes: ["id", "firstName", "lastName", "emailAddress",]
+                attributes: ["id", "firstName", "lastName", "emailAddress"]
             }
         ]
     });
     res.json({ courses });
 }));
 
-router.get("/", asyncHandler( async (req, res) => { //SEND GET request to Return a list of courses (including the user that owns each course) for the provided course ID
-    const courses = await Course.findAll ({
+router.get("/:id", asyncHandler( async (req, res) => { //SEND GET request to Return a list of courses (including the user that owns each course) for the provided course ID
+    const coursesById = await Course.findByPk (req.params.id, {
         attributes: ["id", "title", "description", "userId"],
         include: [
             {
                 model: User,
-                attributes: ["id", "firstName", "lastName", "emailAddress",]
+                attributes: ["id", "firstName", "lastName", "emailAddress"]
             }
         ]
     });
-    res.json({ courses });
+    if (coursesById) {
+        res.json({ coursesById });
+    } else {
+        res.status(404).json({ message: "No course found."});
+    }
 }));
+
+router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201 Creates a course
+    Course.findOne({ where: { title: req.body.title}})
+        .then (course => {
+            if (course) {
+                res.json({ error: "Ooops! This course already exists."});
+            } else {
+                const newCourse = {
+                    title: req.body.title,
+                    description: req.body.description,
+                    estimatedTime: req.body.estimatedTime,
+                    materialsNeeded: req.body.materialsNeeded,
+                    userId: req.currentUser.id
+                };
+            Course.create(newCourse)
+                .then(() => {
+                    res.status(201).end();
+                })
+                .catch(err => {
+                    err.status = 400;
+                    next(err);
+                });
+            }
+        })
+        .catch(err => {
+            err.status = 400;
+            next(err);
+        });
+});
+
+//PUT /api/courses/:id 204 - Updates a course
+        
 
 
 
@@ -57,8 +93,8 @@ module.exports = router;
 Create the course routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
 XX GET /api/courses 200 - Returns a list of courses (including the user that owns each course)
-GET /api/courses/:id 200 - Returns a the course (including the user that owns the course) for the provided course ID
-POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
+XX GET /api/courses/:id 200 - Returns a the course (including the user that owns the course) for the provided course ID
+XX POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
 PUT /api/courses/:id 204 - Updates a course and returns no content
 DELETE /api/courses/:id 204 - Deletes a course and returns no content
 

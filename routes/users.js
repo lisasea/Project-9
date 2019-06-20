@@ -27,7 +27,7 @@ router.get("/", authenticateUser, (req, res) => { // ?? (req, res, next) ?? retu
 
 
 // /*                
-router.post("/", (req, res, next) => { //creates user
+router.post("/", asyncHandler ( async(req, res, next) => { //creates user
     User.findOne({ where: { emailAddress: req.body.emailAddress }}) //check to see if email already exists
         .then(user => {
             if (user) { //if email already exists - error message
@@ -56,7 +56,7 @@ router.post("/", (req, res, next) => { //creates user
         err.status = 400;
         next(err);
     });
-});
+}));
 
 module.exports = router;
 
