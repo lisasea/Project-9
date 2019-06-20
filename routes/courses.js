@@ -98,7 +98,21 @@ router.put("/:id", authenticateUser, (req, res) => {  //?? need (req, res, next)
         .catch(err => console.error(err));
 });
         
-
+router.delete("/:id", authenticateUser, (req, res) => { //DELETE /api/courses/:id 204 - Deletes a course
+    Course.findOne({ where: {id: req.params;id}})
+        .then(course => {
+            if(!course) {
+                res.status(400);
+                res.json({ error: "Course not found."})
+            } else {
+                course.destroy();
+            }
+        }) 
+        .then(() => {
+            res.status(204).end();
+        })
+        .catch(err => console.error(err));
+});
 
 
 module.exports = router;
@@ -106,9 +120,9 @@ module.exports = router;
 /*
 
 // XX SEND GET request to READ a list of courses
-// Send GET request to READ (view) a course
-// Send POST request to CREATE a new course
-// Send PUT request to UPDATE (edit) a course
+// XXSend GET request to READ (view) a course
+// XXSend POST request to CREATE a new course
+// XXSend PUT request to UPDATE (edit) a course
 // Send DELETE request to DELETE a course
 
 Create the course routes
@@ -116,7 +130,7 @@ Set up the following routes (listed in the format HTTP METHOD Route HTTP Status 
 XX GET /api/courses 200 - Returns a list of courses (including the user that owns each course)
 XX GET /api/courses/:id 200 - Returns a the course (including the user that owns the course) for the provided course ID
 XX POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
-PUT /api/courses/:id 204 - Updates a course and returns no content
+XX PUT /api/courses/:id 204 - Updates a course and returns no content
 DELETE /api/courses/:id 204 - Deletes a course and returns no content
 
 Update User and Course routes
