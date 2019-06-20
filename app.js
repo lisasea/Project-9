@@ -3,6 +3,7 @@
 const express = require("express"); // load modules
 const app = express(); // create the Express app
 const morgan = require("morgan");
+const fs = require('fs');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({ //builds data base
   dialect: 'sqlite',
@@ -28,7 +29,7 @@ app.get('/', (req, res) => { // setup a friendly greeting for the root route
   });
 });
 
-app.use("/api", require("./routes/indexes")); //index route 
+app.use("/api/indexes", require("./routes/indexes")); //index route 
 app.use("/api/users", require("./routes/users")); //users route
 app.use("/api/courses", require("./routes/courses"));//courses route
 app.use("/api/authenticate", require("./routes/authenticate"));//authenticate rote
@@ -49,5 +50,48 @@ app.use((err, req, res, next) => { // setup a global error handler
     error: {},
   });
 });
+/*
+//below from asynchronous code in express video 2 (what's utf-8 in line 57?)
+//CALL BACKS
+function getUsers() {
+  return new Promise((resolve, reject) => {
+    fs.readFile('data.json', 'utf-8', (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+      const users = JSON.parse(data);
+      resolve();
+      }
+    });
+  });
+}
+
+  app.get('/', (req, res) => {  //also from asynchronous code in express video 2
+    getUsers()
+      .then((users) => {
+        throw new Error("Nooooooo"); //if works delete this line
+        res.render('index', {title: "Users", users: users.users});
+      })
+      .catch((err) => {
+        res.render('error', {error: err});
+      });
+  });
+}
+
+//code from teachers notes - example of what using promises to perform two asynchronous operations
+app.get('/:id', (req, res) => {
+ getUser(req.params.id)
+   .then((user)=>{
+     return getFollowers(user);
+   })
+   .then((user, followers)=>{
+     res.render('profile', {title: "Profile Page", users: user, followers: followers});
+   })
+   .catch((err) => {
+     res.render('error', {error: err});
+   });
+});
+*/
+
 
 app.listen(5000, () => console.log('REST API listening on port 5000!')); // set our port

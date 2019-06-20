@@ -5,7 +5,17 @@ const User = require("../models").User;
 const authenticateUser = require("./authenticate");
 const Sequelize = require("sequelize"); //do I need this here?
 
-router.get("/", authenticateUser, (req, res) => { //returns the current authenticated user
+function asyncHandler(cb) {
+    return async (req, res, next) => {
+        try{
+            await cb(req, res, next);
+        } catch (err) {
+            next(err);
+        }
+    };
+}
+
+router.get("/", authenticateUser, (req, res) => { // ?? (req, res, next) ?? returns the current authenticated user
     res.status(200);
     res.json({
         id: req.currentUser.id,
