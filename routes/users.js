@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const morgan = require("morgan"); //do I need this here?
+const bcrypt = require("bcryptjs");
 const User = require("../models").User;
 const authenticateUser = require("./authenticate");
 const Sequelize = require("sequelize"); //do I need this here?
+
 
 function asyncHandler(cb) {
     return async (req, res, next) => {
@@ -21,7 +23,7 @@ router.get("/", authenticateUser, (req, res) => { // ?? (req, res, next) ?? retu
         id: req.currentUser.id,
         firstName: req.currentUser.firstName,
         lastName: req.currentUser.lastName,
-        emailAddress: req.currentUser.emailAddress,
+        emailAddress: req.currentUser.emailAddress
     });
 });
 
