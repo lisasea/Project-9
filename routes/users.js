@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const morgan = require("morgan"); //do I need this here?
 const bcrypt = require("bcryptjs");
 const User = require("../models").User;
 const authenticateUser = require("./authenticate");
 const Sequelize = require("sequelize"); //do I need this here?
+const morgan = require("morgan"); //do I need this here?
 
-
+/*
 function asyncHandler(cb) {
     return async (req, res, next) => {
         try{
@@ -16,6 +16,7 @@ function asyncHandler(cb) {
         }
     };
 }
+*/
 
 router.get("/", authenticateUser, (req, res) => { // ?? (req, res, next) ?? returns the current authenticated user
     res.status(200);
@@ -29,7 +30,9 @@ router.get("/", authenticateUser, (req, res) => { // ?? (req, res, next) ?? retu
 
 
 // /*                
-router.post("/", asyncHandler ( async(req, res, next) => { //creates user
+//router.post("/", asyncHandler ( async(req, res, next) => { //creates user
+    
+router.post("/", (req, res, next) => {
     User.findOne({ where: { emailAddress: req.body.emailAddress }}) //check to see if email already exists
         .then(user => {
             if (user) { //if email already exists - error message
@@ -58,7 +61,7 @@ router.post("/", asyncHandler ( async(req, res, next) => { //creates user
         err.status = 400;
         next(err);
     });
-}));
+});
 
 module.exports = router;
 

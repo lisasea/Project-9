@@ -120,10 +120,10 @@ module.exports = router;
 /*
 
 // XX SEND GET request to READ a list of courses
-// XXSend GET request to READ (view) a course
-// XXSend POST request to CREATE a new course
-// XXSend PUT request to UPDATE (edit) a course
-// Send DELETE request to DELETE a course
+// XX Send GET request to READ (view) a course
+// XX Send POST request to CREATE a new course
+// XX Send PUT request to UPDATE (edit) a course
+// XX Send DELETE request to DELETE a course
 
 Create the course routes
 Set up the following routes (listed in the format HTTP METHOD Route HTTP Status Code):
