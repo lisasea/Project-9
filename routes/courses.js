@@ -82,7 +82,7 @@ router.put("/:id", authenticateUser, (req, res) => {  //?? need (req, res, next)
             if(!course) {
                 res.status(400);
                 res.json({ error: "Course not found."});
-            } else if (course.title && course.description){ 
+            } else if (req.body.title && req.body.description){ 
                 const courseUpdated = {
                     title: req.body.title,
                     description: req.body.description,
@@ -91,8 +91,9 @@ router.put("/:id", authenticateUser, (req, res) => {  //?? need (req, res, next)
                     userId: req.currentUser.id
                 };
                 course.update(courseUpdated);
-            } else {  
-                res.status(400);
+            } else {
+                message = "Title and Description are required";  
+                res.status(400).json({message});
             };
         })
         .then(() => {
