@@ -31,7 +31,7 @@ router.get("/", asyncHandler( async (req, res) => { //SEND GET request to Return
 
 router.get("/:id", asyncHandler( async (req, res) => { //SEND GET request to Return a list of courses (including the user that owns each course) for the provided course ID
     const coursesById = await Course.findByPk (req.params.id, {
-        attributes: ["id", "title", "description", "userId"],
+        attributes: ["id", "title", "description", "estimatedTime", "materialsNeeded", "userId"],
         include: [
             {
                 model: User,
@@ -40,6 +40,7 @@ router.get("/:id", asyncHandler( async (req, res) => { //SEND GET request to Ret
         ]
     });
     if (coursesById) {
+        res.status(200);
         res.json({ coursesById });
     } else {
         res.status(404).json({ message: "No course found."});
@@ -113,7 +114,6 @@ router.delete("/:id", authenticateUser, (req, res) => { //DELETE /api/courses/:i
         })
         .catch(err => console.error(err));
 });
-
 
 module.exports = router;
 
