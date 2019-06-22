@@ -3,7 +3,7 @@
 const express = require("express"); // load modules
 const app = express(); // create the Express app
 const morgan = require("morgan");
-const fs = require('fs');
+//const fs = require('fs'); 
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === "true";
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({ //builds data base
@@ -30,10 +30,10 @@ app.get('/', (req, res) => { // setup a friendly greeting for the root route
   });
 });
 
-app.use("/api/indexes", require("./routes/indexes")); //index route 
-app.use("/api/users", require("./routes/users")); //users route
-app.use("/api/courses", require("./routes/courses")); //courses route
-app.use("/api/authenticate", require("./routes/authenticate"));//authenticate rote
+app.use("/api/indexes", require("./routes/indexes")); // REST API index route w/ Express application use() method  
+app.use("/api/users", require("./routes/users")); // REST API users route         "       "
+app.use("/api/courses", require("./routes/courses")); // REST API courses route            "       "
+app.use("/api/authenticate", require("./routes/authenticate"));// REST API authenticate rote      "       "
 
 app.use((req, res) => {  // send 404 if no other route matched
   res.status(404).json({
@@ -51,6 +51,8 @@ app.use((err, req, res, next) => { // setup a global error handler
     error: {},
   });
 });
+
+app.listen(5000, () => console.log('REST API listening on port 5000!')); // set our port
 /*
 //below from asynchronous code in express video 2 (what's utf-8 in line 57?)
 //CALL BACKS
@@ -95,4 +97,3 @@ app.get('/:id', (req, res) => {
 */
 
 
-app.listen(5000, () => console.log('REST API listening on port 5000!')); // set our port
