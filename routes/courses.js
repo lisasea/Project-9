@@ -62,7 +62,8 @@ router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201
                 };
             Course.create(newCourse)
                 .then(() => {
-                    res.status(201).end();
+                    const id = coursesById.id; // gets new course id for location
+                    res.location(`/api/courses/${id}`).status(201).end();
                 })
                 .catch(err => {
                     err.status = 400;
