@@ -48,6 +48,19 @@ router.get("/:id", asyncHandler( async (req, res) => { //SEND GET request to Ret
 }));
 
 router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201 Creates a course
+    if(!req.body.title && !req.body.description) {
+        const err = new Error("Title and Description are required.");
+        err.status = 400;
+        next(err);
+    } else if (!req.body.title) {
+        const err = new Error ("Enter a Title");
+        err.status = 400;
+        next(err);
+    } else if (!req.body.description) {
+        const err = new Error("Enter a Description");
+        err.status = 400;
+        next(err);
+    } else {
     Course.findOne({ where: { title: req.body.title}})
         .then (course => {
             if (course) {
@@ -75,6 +88,7 @@ router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201
             err.status = 400;
             next(err);
         });
+    }
 });
 
 router.put("/:id", authenticateUser, (req, res) => {  //?? need (req, res, next)?? PUT /api/courses/:id 204 - Updates a course
