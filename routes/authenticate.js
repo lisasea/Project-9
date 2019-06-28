@@ -20,8 +20,8 @@ module.exports = (req, res, next) => {
                     req.currentUser = user;
                     next();
                 } else {
-                    req.status(401);
-                    message = "Passwords don't match. {lease try again";
+                    res.status(401);
+                    message = "Passwords don't match. Please try again";
                     res.json({ message: message });
                 }
             } else {
