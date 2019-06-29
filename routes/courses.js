@@ -53,11 +53,11 @@ router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201
         err.status = 400;
         next(err);
     } else if (!req.body.title) {
-        const err = new Error ("Enter a Title");
+        const err = new Error ("Enter a Course Title");
         err.status = 400;
         next(err);
     } else if (!req.body.description) {
-        const err = new Error("Enter a Description");
+        const err = new Error("Enter a Course Description");
         err.status = 400;
         next(err);
     } else {
@@ -65,7 +65,7 @@ router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201
         .then (course => {
             if (course) {
                 res.json({ error: "Ooops! This course already exists."});
-            } else {
+            } else { // couse does not exist already... create a new course
                 const newCourse = {
                     title: req.body.title,
                     description: req.body.description,
@@ -74,7 +74,7 @@ router.post("/", authenticateUser, (req, res, next) => { //POST /api/courses 201
                     userId: req.currentUser.id
                 };
             Course.create(newCourse)
-                .then(() => {
+                .then((coursesById) => {
                     const id = coursesById.id; // gets new course id for location
                     res.location(`/api/courses/${id}`).status(201).end();
                 })
