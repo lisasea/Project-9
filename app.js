@@ -5,6 +5,7 @@ const express = require("express"); // load modules
 const app = express(); // create the Express app
 const morgan = require("morgan");
 //const fs = require('fs'); 
+const cors = require('cors'); // load CORS
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === "true";
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({ //builds data base
@@ -24,6 +25,8 @@ sequelize //tests data base connection
 app.use(express.json());   // setup request body JSON parsing
 
 app.use(morgan("dev")); // setup morgan which gives us http request logging
+
+app.use(cors()); // setup cors
 
 app.get('/', (req, res) => { // setup a friendly greeting for the root route
   res.json({
