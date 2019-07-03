@@ -26,7 +26,7 @@ app.use(express.json());   // setup request body JSON parsing
 
 app.use(morgan("dev")); // setup morgan which gives us http request logging
 
-app.use(cors()); // setup cors
+app.use(cors()); // setup cors 
 
 app.get('/', (req, res) => { // setup a friendly greeting for the root route
   res.json({
