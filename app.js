@@ -8,10 +8,16 @@ const morgan = require("morgan");
 const cors = require('cors'); // load CORS
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === "true";
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize({ //builds data base
-  dialect: 'sqlite',
-  storage: './fsjstd-restapi.db'
-});
+let sequelize;
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize(process.env.DATABASE_URL);
+} else {
+  sequelize = new Sequelize({ //builds data base
+    dialect: 'sqlite',
+    storage: './fsjstd-restapi.db'
+  }); 
+}
+
 
 sequelize //tests data base connection
   .authenticate()
@@ -56,4 +62,6 @@ app.use((err, req, res, next) => { // setup a global error handler
   });
 });
 
-app.listen(5000, () => console.log('REST API listening on port 5000!')); // set our port
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log('REST API listening on port `port`')); // set our port
